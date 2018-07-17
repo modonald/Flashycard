@@ -1,0 +1,141 @@
+﻿@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment environment
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Flashcards to help with studying for the MS Azure 70-532 exam">
+    <meta name="author" content="Chico">
+    <link rel="shortcut icon" href="~/assets/ico/favicon.ico">
+
+    <title>@ViewData["Title"] - FlashCards</title>
+
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="~/assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.min.css">
+    <environment include="Development">
+        <link rel="stylesheet" href="~/assets/css/theme.css">
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/assets/css/theme.min.css">
+    </environment>
+    <!--link rel="stylesheet" href="~/css/site.css"-->
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+
+    <!-- NAVBAR
+    ================================================== -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbar_main">
+
+                <!-- Navbar: Brand -->
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">FlashCards</a>
+
+                <!-- Navbar: Toggle menu -->
+                <a href="#" class="navbar-btn navbar-left" id="sidebar__toggle">
+                    <i class="fa fa-bars"></i>
+                </a>
+
+                <!-- Navbar: Brand -->
+                <span class="navbar-left" style="color:#fff; padding:23.5px 15px;font-size:16px;line-height:18px;height:65px">
+                    70-532 Developing Microsoft Azure Solutions
+                </span>
+
+                @if (!environment.EnvironmentName.Equals("Development"))
+                {
+                    <!-- Navbar: Sign out -->
+                    <a class="navbar-btn navbar-right btn btn-accent" asp-controller="Account" asp-action="SignOut">Sign Out</a>
+                }
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <!-- WRAPPER
+    ================================================== -->
+    <div class="wrapper">
+
+        <!-- SIDEBAR
+        ================================================== -->
+        <div class="sidebar">
+
+            <!-- Sidebar: Close button (mobile devices) -->
+            <div class="sidebar__close">
+                <img src="~/assets/img/icons/icon_close.svg" alt="Close sidebar">
+            </div>
+
+            <!-- Sidebar: User -->
+            @Html.Partial("_LoginPartial.cshtml")
+
+            <!-- Sidebar: User nav -->
+            <nav class="sidebar-user__nav" id="sidebar-user__nav">
+                <ul class="sidebar__nav">
+                    <li>
+                        <a asp-controller="Home" asp-action="Index">
+                            <i class="fa fa-book"></i> Cards
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Home" asp-action="Manage">
+                            <i class="fa fa-edit"></i> Manage
+                        </a>
+                    </li>
+                    @if (!environment.EnvironmentName.Equals("Development"))
+                    {
+                        <li>
+                            <a asp-controller="Account" asp-action="SignOut">
+                                <i class="fa fa-sign-out"></i> Sign out
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav> <!-- / .sidebar__user__nav -->
+            <!-- Sidebar: Nav -->
+            <nav id="sidebar__nav">
+                <!-- Loaded from /sidebar.json -->
+            </nav>
+
+        </div> <!-- / .sidebar -->
+        <!-- MAIN CONTENT
+        ================================================== -->
+        <div class="container-fluid">
+
+            @RenderBody()
+
+            <!-- Footer -->
+            <footer class="page__footer">
+                <div class="row">
+                    <div class="col-xs-12">
+                        CC <span class="page__footer__year"></span> &copy; Flashycards by <span style="color:grey">MD</span>
+                    </div>
+                </div>
+            </footer>
+
+        </div> <!-- / .container-fluid -->
+
+    </div> <!-- / .wrapper -->
+    <!-- JavaScript
+    ================================================== -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="~/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="~/assets/plugins/parsley/parsley.min.js"></script>
+    <environment include="Development">
+        <script src="~/assets/js/theme.js"></script>
+        <script src="~/assets/js/kite.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/assets/js/theme.min.js"></script>
+        <script src="~/assets/js/kite.min.js"></script>
+    </environment>
+    <script src="~/assets/js/custom.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

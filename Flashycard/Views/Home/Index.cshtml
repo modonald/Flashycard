@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "FlashCards";
+}
+
+
+@section Styles{
+    <link rel="stylesheet" href="~/assets/plugins/jqvmap/jqvmap.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/fullcalendar/fullcalendar.min.css">
+}
+
+<div class="row">
+    <div class="col-sm-10 col-xs-12">
+
+        <h1 class="page-header">
+            Cards <small></small>
+        </h1>
+
+        <form>
+            <div class="controls col-sm-5 col-xs-12" style="margin-left:0px;padding-left:0px">
+                <div class="form-group">
+                    <select class="form-control" data-bind="options: availableTopics, optionsText: 'topicName', value: selectedTopic"></select>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div> <!-- / .row -->
+
+
+<div class="row">
+    <div class="col-sm-10 col-xs-12">
+
+
+
+        <div id="loadingPanel" class="row">
+            <div class="col-sm-6 col-xs-12">
+                <div class="loader">
+                    <p>Loading...</p>
+                    <div class="extra loader-inner"></div>
+                    <div class="extra loader-inner"></div>
+                    <div class="extra loader-inner"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row" data-bind="fadeVisible: !loading()">
+            <div class="col-sm-10 col-xs-12" data-bind="visible: list().length > 0">
+
+                <div class="ribbon ribbon_primary panel" style="background-color:#fff;margin-bottom:0px;">
+
+                    <div class="ribbon__title">
+                        Question
+                    </div>
+
+                    <div class="ribbon__content" data-bind="foreach: pagedList">
+                        <h4 data-bind="html: question"></h4>
+                        <div class="row">
+                            <div class="col-xs-12">
+
+                                <div class="ribbon ribbon_success">
+
+                                    <div class="ribbon__title">
+                                        Answer
+                                    </div>
+
+                                    <div class="ribbon__content">
+                                        <p data-bind="visible: imageUrl.length > 0">
+                                            <img data-bind="attr: { src: imageUrl}" class="card-img-top img-responsive rounded">
+                                        </p>
+                                        <span class="card-text" data-bind="html: explanation"></span>
+                                        <div data-bind="visible: referenceUrl.length > 0">
+                                            <small class="card-link"><a data-bind="attr: { href: referenceUrl}">Reference</a></small>
+                                        </div>
+                                    </div><!-- / ribbon__content -->
+
+                                </div> <!-- / .ribbon__item -->
+
+                            </div>   <!-- / .col-xs-12 -->
+                        </div> <!-- / .row -->
+                    </div><!-- / ribbon__content -->
+
+                </div> <!-- / .ribbon__item -->
+
+
+                <div class="panel-footer" style="background-color:transparent;border:0px">
+                    <a href="#" class="btn btn-primary" data-bind="click: nextPage">Next FlashCard</a>
+                </div>
+
+            </div>
+        </div> <!-- / .row -->
+    </div>
+</div> <!-- / .row -->
+
+
+@section Scripts{
+    <script src="~/assets/plugins/chart-js/Chart.min.js"></script>
+    <script src="~/assets/plugins/count-to/jquery.countTo.js"></script>
+    <script src="~/assets/plugins/fullcalendar/lib/moment.min.js"></script>
+    <script src="~/assets/plugins/fullcalendar/fullcalendar.js"></script>
+    <script src="~/assets/plugins/knockout/knockout.js"></script>
+    <script src="~/js/cardapp.js"></script>
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            ko.applyBindings(new CardsViewModel());
+        });
+    </script>
+}

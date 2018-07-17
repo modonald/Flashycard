@@ -1,0 +1,29 @@
+﻿@using System.Security.Principal
+@using System
+
+<div class="sidebar__user">
+
+    <!-- Sidebar: User avatar -->
+    <div class="sidebar-user__avatar">
+        <img src="~/assets/img/user_1.png" alt="...">
+    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <!-- Sidebar: User info -->
+        <a class="sidebar-user__info" role="button" href="#sidebar-user__nav" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-user__nav">
+            <h4>Welcome @User.Identity.Name</h4>
+            <p>@DateTime.Now.ToString("d MMM yyyy")</p>
+        </a>
+    }
+    else
+    {
+        <!-- Sidebar: User info -->
+        <a class="sidebar-user__info" role="button" href="#sidebar-user__nav" data-toggle="collapse" aria-expanded="false" aria-controls="sidebar-user__nav">
+            <h4>Welcome Friend</h4>
+            <p>@DateTime.Now.ToString("d MMM yyyy")</p>
+        </a>
+    }
+
+</div>
+
+
