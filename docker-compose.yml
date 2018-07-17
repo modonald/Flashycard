@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  flashytest:
+    image: ${DOCKER_REGISTRY}flashytest
+    build:
+      context: .
+      dockerfile: FlashyTest\Dockerfile
